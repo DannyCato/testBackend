@@ -8,7 +8,7 @@ app = Flask(__name__)
 CORS(app)
 api = Api(app)
 
-api.add_resource()
+api.add_resource(add_new_resource, "/")
 
 # add support for args 
 def main():

@@ -1,15 +1,19 @@
+from hashlib import sha512
+
 # variables shared across many files
 
 endpoints = dict()
 
-def _contains(value):
+def endpoints_contains(value):
     return endpoints.keys.__contains__(value)
         
-def add_endpoint(new_value):
-    if not _contains(new_value):
-        endpoints[new_value] = {new_value,}
+def add_endpoint(hash, payload):
+    if not endpoints_contains(hash):
+        endpoints[hash] = payload
 
-def add_child(parent, child):
-    if not _contains(parent):
-        add_endpoint(parent)
-    endpoints[parent] = endpoints[parent].add(child)
+def create_hash(string: str):
+    hasher = sha512()
+    pass_bytes = bytes(string, 'utf-8')
+    hasher.update(pass_bytes)
+    hash = hasher.hexdigest()
+    return hash
